@@ -5,7 +5,9 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 	<style type="text/css">
-
+	body {
+		font-family: Open Sans;
+	}
 	.gameArea {
 		width:200px;
 		margin-top:30px;
@@ -20,52 +22,52 @@
 		margin-top:5px;
 	}
 
+	#blue, #red, #yellow, #green {
+		opacity:.5;
+	}
+
+	#blue:active, #red:active, #yellow:active, #green:active {
+		opacity:1;
+	}
+
 	#blue	{
-		background-color: rgb(116,189,255) ;
+		background-color: #1e90ff ;
 		border-radius: 100px 0 0 0;
 	    -moz-border-radius: 100px 0 0 0;
 	    -webkit-border-radius: 100px 0 0 0;
 	}
 
-	#blue:active	{
-		background-color: rgb(30,144,255);
-	}
-
 	#yellow	{
-		background-color: rgb(255,245,123);
+		background-color: #FEEF33;
 		border-radius: -100px 0 0 100px;
 	    -moz-border-radius: 0 0 0 100px;
 	    -webkit-border-radius: 0 0 0 100px;
 	}
 
-	#yellow:active	{
-		background-color: rgb(254,239,51);
-	}
-
 	#red	{
-		background-color: rgb(254,156,142);
+		background-color: #FF5643;
 		border-radius: 0 100px 0 0;
 	    -moz-border-radius: 0 100px 0 0;
 	    -webkit-border-radius: 0 100px 0 0;
 	}
 
-	#red:active	{
-		background-color: rgb(255,86,67);
-	}
-
 	#green	{
-		background-color: rgb(220,235,102);
+		background-color: #BEDE15;
 		border-radius: 0 0 100px 0;
 	    -moz-border-radius: 0 0 100px 0;
 	    -webkit-border-radius: 0 0 100px 0;
 	}
 
-	#green:active	{
-		background-color: rgb(190,222,21);
+	.roundNum {
+		border:none;
+		margin-top:15px;
+		font-size: 20px;
+		font-weight: bold;
+
 	}
 
 	button	{
-		border:1px solid grey;
+		border:none;
 	}
 	button:focus {
     background-color: none;
@@ -78,6 +80,9 @@
 	</style>
 </head>
 <body>
+	<audio id="bigSwitch">
+			<source src="/Sounds/bigSwitch.wav" type="audio/wav">
+	</audio>
 	<div class="container">
 		<div class="gameArea center-block">
 			<div class="row center-block">
@@ -88,10 +93,11 @@
 				<button id="yellow" class="gameBtn"></button>
 				<button id="green" class="gameBtn"></button>
 			</div>
-			<div class="row center-block">
-				<button id="start" class="startBtn center-block">Click to start!</button>
-			</div>
 		</div>
+		<div class="container menu">
+			<input class="roundNum center-block text-center">
+	    	<button id="start" class="startBtn center-block">Click to start!</button>
+	    </div>
 	</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
@@ -125,42 +131,42 @@
 	    	switch (value) {
 				case "red":
 	                $('#red').animate ({
-	                    'backgroundColor' : 'rgb(255,86,67)'
+	                    'opacity' : 1
 	                }, 750);
 					$('#red').animate ({
-	                    'backgroundColor' : 'rgb(254,156,142)'
+	                    'opacity' : '.6'
 	                }, 500);
 					break;
 				case "yellow":
 					$('#yellow').animate ({
-	                    'backgroundColor' : 'rgb(254,239,51)'
+	                    'opacity' : 1
 	                }, 750);
 					$('#yellow').animate ({
-	                    'backgroundColor' : 'rgb(255,245,123)'
+	                    'opacity' : '.6'
 	                }, 500);
 					break;
 				case "green":
 					$('#green').animate ({
-	                    'backgroundColor' : 'rgb(190,222,21)'
+	                    'opacity' : 1
 	                }, 750);
 					$('#green').animate ({
-	                    'backgroundColor' : 'rgb(220,235,102)'
+	                    'opacity' : '.6'
 	                }, 500);
 					break;
 				case "blue":
 					$('#blue').animate ({
-	                    'backgroundColor' : 'rgb(30,144,255)'
+	                    'opacity' : 1
 	                }, 750);
 					$('#blue').animate ({
-	                    'backgroundColor' : 'rgb(116,189,255)'
+	                    'opacity' : '.6'
 	                }, 500);
 					break;
 			};
+			index = 0;
 	    };
 
-	    // the game
-	    $('.startBtn').click(function(event) {
-   			switch (color) {
+	    function showFirstColor() {
+	    	switch (color) {
 				case "red":
 	                $('#red').animate ({
 	                    'backgroundColor' : 'rgb(255,86,67)'
@@ -201,24 +207,52 @@
 	                solution.push(color);
 	                console.log(solution);
 					break;
-			} //end color animation switch statement
-		    //gets id of clicked on button
-		    $('.gameBtn').click(function(event) {
+			}
+		};
 
+	    // the game
+	    $('.startBtn').click(function(event) {
+	    	$('#start').hide();
+	    	$('#start').html('Try again!');
+	    	$('.roundNum').show();
+	    	$('.roundNum').val('Round ' + (index + 1));
+	    	$('#bigSwitch').get(0).play();
+	    	$('body').css ({
+	    		'background-color' : 'black'
+	    	})
+	    	$('.gameBtn').css({
+	    		opacity : 0
+	    	})
+   			setTimeout(showFirstColor, 3000);
+		    //gets id of clicked on button
+		    $('.gameBtn').mouseup(function(event) {
+				$(this).css ({
+                    'opacity' : '.6'
+                }, 500);
+			});
+		    $('.gameBtn').mousedown(function(event) {
+		    	$(this).css ({
+	                    'opacity' : 1
+	                }, 750);
 	   			var userInput = $(this).attr('id');
 	   			console.log(userInput);
 	   			if ( userInput == solution[index] ) {
 	   				console.log("That's right!");
 	   				index++;
 	        		if (index == solution.length) {
+	        			$('.roundNum').val('Round ' + (index + 1));
 	        			var newColor = colors[Math.floor(Math.random()*colors.length)];
 		    			console.log(newColor);
 	        			solution.push(newColor);
 	        			console.log(solution);
-	        				for (var i = 0; i < solution.length; i++) {
-	        					setTimeout(showSolution, 1500, solution[i]) 
-	        				};
-	        			index = 0;
+	        			var showIndex = 0
+	        			var interval = setInterval(function(){
+	        				showSolution(solution[showIndex]);
+	        					showIndex++;
+	        					if (showIndex >= solution.length){
+	        						clearInterval(interval);
+	        					}
+    					}, 1500);        				
 	        		};
 	   			} else {
 		        	console.log("WRONG!");
@@ -226,7 +260,9 @@
 		   			// var wrongString = "WRONG!"
 					// $('.codeEntry').val( wrongString );
 		        	index = 0;
-		        	solution = []
+		        	solution = [];
+		        	$('#start').show();
+		        	console.log(solution);
         		};
 	   		});
 		});
