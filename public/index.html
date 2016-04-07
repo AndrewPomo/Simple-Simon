@@ -11,48 +11,48 @@
 	.gameArea {
 		width:200px;
 		margin-top:30px;
+		background-color: white;
+		border-radius: 100px;
+		
 	}
 	.gameBtn {
 		height:100px;
 		width:100px;
 		float:left;
+		opacity: .6;
 	}
 
 	.startBtn {
 		margin-top:5px;
 	}
 
-	#blue, #red, #yellow, #green {
-		opacity:.5;
-	}
-
-	#blue:active, #red:active, #yellow:active, #green:active {
-		opacity:1;
-	}
-
 	#blue	{
-		background-color: #1e90ff ;
+		background-color: blue;
+		border: 1px solid blue;
 		border-radius: 100px 0 0 0;
 	    -moz-border-radius: 100px 0 0 0;
 	    -webkit-border-radius: 100px 0 0 0;
 	}
 
 	#yellow	{
-		background-color: #FEEF33;
+		background-color: yellow;
+		border: 1px solid yellow;
 		border-radius: -100px 0 0 100px;
 	    -moz-border-radius: 0 0 0 100px;
 	    -webkit-border-radius: 0 0 0 100px;
 	}
 
 	#red	{
-		background-color: #FF5643;
+		background-color: red;
+		border: 1px solid red;
 		border-radius: 0 100px 0 0;
 	    -moz-border-radius: 0 100px 0 0;
 	    -webkit-border-radius: 0 100px 0 0;
 	}
 
 	#green	{
-		background-color: #BEDE15;
+		background-color: green;
+		border: 1px solid green;
 		border-radius: 0 0 100px 0;
 	    -moz-border-radius: 0 0 100px 0;
 	    -webkit-border-radius: 0 0 100px 0;
@@ -66,9 +66,7 @@
 
 	}
 
-	button	{
-		border:none;
-	}
+	
 	button:focus {
     background-color: none;
     outline: 0;
@@ -82,6 +80,9 @@
 <body>
 	<audio id="bigSwitch">
 			<source src="/Sounds/bigSwitch.wav" type="audio/wav">
+	</audio>
+	<audio id="powerUp">
+			<source src="/Sounds/powerUp.mp3" type="audio/wav">
 	</audio>
 	<div class="container">
 		<div class="gameArea center-block">
@@ -131,7 +132,7 @@
 	    	switch (value) {
 				case "red":
 	                $('#red').animate ({
-	                    'opacity' : 1
+	                    'opacity' : '1'
 	                }, 750);
 					$('#red').animate ({
 	                    'opacity' : '.6'
@@ -139,7 +140,7 @@
 					break;
 				case "yellow":
 					$('#yellow').animate ({
-	                    'opacity' : 1
+	                    'opacity' : '1'
 	                }, 750);
 					$('#yellow').animate ({
 	                    'opacity' : '.6'
@@ -147,7 +148,7 @@
 					break;
 				case "green":
 					$('#green').animate ({
-	                    'opacity' : 1
+	                    'opacity' : '1'
 	                }, 750);
 					$('#green').animate ({
 	                    'opacity' : '.6'
@@ -155,7 +156,7 @@
 					break;
 				case "blue":
 					$('#blue').animate ({
-	                    'opacity' : 1
+	                    'opacity' : '1'
 	                }, 750);
 					$('#blue').animate ({
 	                    'opacity' : '.6'
@@ -169,40 +170,40 @@
 	    	switch (color) {
 				case "red":
 	                $('#red').animate ({
-	                    'backgroundColor' : 'rgb(255,86,67)'
+	                    'opacity' : '1'
 	                }, 750);
 					$('#red').animate ({
-	                    'backgroundColor' : 'rgb(254,156,142)'
+	                    'opacity' : '.6'
 	                }, 500);
 	                solution.push(color);
 	                console.log(solution);
 					break;
 				case "yellow":
 					$('#yellow').animate ({
-	                    'backgroundColor' : 'rgb(254,239,51)'
+	                    'opacity' : '1'
 	                }, 750);
 					$('#yellow').animate ({
-	                    'backgroundColor' : 'rgb(255,245,123)'
+	                    'opacity' : '.6'
 	                }, 500);
 	                solution.push(color);
 	                console.log(solution);
 					break;
 				case "green":
 					$('#green').animate ({
-	                    'backgroundColor' : 'rgb(190,222,21)'
+	                    'opacity' : '1'
 	                }, 750);
 					$('#green').animate ({
-	                    'backgroundColor' : 'rgb(220,235,102)'
+	                    'opacity' : '.6'
 	                }, 500);
 	                solution.push(color);
 	                console.log(solution);
 					break;
 				case "blue":
 					$('#blue').animate ({
-	                    'backgroundColor' : 'rgb(30,144,255)'
+	                    'opacity' : '1'
 	                }, 750);
 					$('#blue').animate ({
-	                    'backgroundColor' : 'rgb(116,189,255)'
+	                    'opacity' : '.6'
 	                }, 500);
 	                solution.push(color);
 	                console.log(solution);
@@ -211,19 +212,110 @@
 		};
 
 	    // the game
+
 	    $('.startBtn').click(function(event) {
+	    	// Game Intro
+	    	//Dark
 	    	$('#start').hide();
 	    	$('#start').html('Try again!');
-	    	$('.roundNum').show();
+	    	$('.roundNum').hide();
 	    	$('.roundNum').val('Round ' + (index + 1));
 	    	$('#bigSwitch').get(0).play();
 	    	$('body').css ({
 	    		'background-color' : 'black'
 	    	})
-	    	$('.gameBtn').css({
-	    		opacity : 0
+	    	$('.gameArea').css ({
+	    		'background-color' : 'black'
 	    	})
-   			setTimeout(showFirstColor, 3000);
+	    	$('.gameBtn').animate({
+	    		opacity : 0
+	    	}, 1)
+	    	// Power Up
+	    	setTimeout(function(){
+	    		// $('.gameBtn').animate({
+	    		// 	opacity : 1
+	    		// }, 500);
+	    		// $('.gameBtn').animate({
+	    		// 	opacity :'.6'
+	    		// }, 500);
+	    		$('#powerUp').get(0).play();
+	    	},1000)
+	    	setTimeout(function(){
+	    		$('#red').animate({
+	    		opacity : 1
+	    		}, 200)
+	    	}, 2400)
+	    	setTimeout(function(){
+	    		$('#red').animate({
+	    		opacity : 0
+	    		}, 200)
+	    	}, 2500);
+	    	setTimeout(function(){
+	    		$('#green').animate({
+	    		opacity : 1
+	    		}, 200)
+	    	}, 2500)
+	    	setTimeout(function(){
+	    		$('#green').animate({
+	    		opacity : 0
+	    		}, 200)
+	    	}, 2600);
+	    	setTimeout(function(){
+	    		$('#yellow').animate({
+	    		opacity : 1
+	    		}, 200)
+	    	}, 2600)
+	    	setTimeout(function(){
+	    		$('#yellow').animate({
+	    		opacity : 0
+	    		}, 200)
+	    	}, 2700);
+	    	setTimeout(function(){
+	    		$('#blue').animate({
+	    		opacity : 1
+	    		}, 200)
+	    	}, 2700)
+	    	setTimeout(function(){
+	    		$('#blue').animate({
+	    		opacity : 0
+	    		}, 200)
+	    	}, 2800);
+	    	setTimeout(function(){
+	    		$('#red').animate({
+	    		opacity : 1
+	    		}, 200)
+	    	}, 2800)
+	    	setTimeout(function(){
+	    		$('#red').animate({
+	    		opacity : 0
+	    		}, 200)
+	    	}, 2800);
+	    	setTimeout(function(){
+	    		$('#green').animate({
+	    		opacity : 1
+	    		}, 200)
+	    	}, 2900)
+	    	setTimeout(function(){
+	    		$('#green').animate({
+	    		opacity : 0
+	    		}, 200)
+	    	}, 3000);
+
+	    	// setTimeout(function(){
+	    	// 	$('.gameArea').animate({
+	    	// 		backgroundColor : 'white',
+	    	// 		'border' : '1px solid black'
+	    	// 	}, 500)
+	    	// },100;
+	    	// setTimeout(function(){
+	    	// 	$('.gameBtn').animate({
+	    	// 		opacity : 1
+	    	// 	}, 500);
+	    	// 	$('.gameBtn').animate({
+	    	// 		opacity :'.6'
+	    	// 	}, 500);
+	    	// $('.roundNum').show();
+   			// setTimeout(showFirstColor, 3000);
 		    //gets id of clicked on button
 		    $('.gameBtn').mouseup(function(event) {
 				$(this).css ({
@@ -266,11 +358,6 @@
         		};
 	   		});
 		});
-
-	    
-	    
-
-	    
      })
 })();
 
