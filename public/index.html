@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Simple Simon!</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+	<style type="text/css">
+
+	.gameArea {
+		width:200px;
+		margin-top:30px;
+	}
+	.gameBtn {
+		height:100px;
+		width:100px;
+		float:left;
+	}
+
+	.startBtn {
+		margin-top:5px;
+	}
+
+	#blue	{
+		background-color: rgb(116,189,255) ;
+		border-radius: 100px 0 0 0;
+	    -moz-border-radius: 100px 0 0 0;
+	    -webkit-border-radius: 100px 0 0 0;
+	}
+
+	#blue:active	{
+		background-color: rgb(30,144,255);
+	}
+
+	#yellow	{
+		background-color: rgb(255,245,123);
+		border-radius: -100px 0 0 100px;
+	    -moz-border-radius: 0 0 0 100px;
+	    -webkit-border-radius: 0 0 0 100px;
+	}
+
+	#yellow:active	{
+		background-color: rgb(254,239,51);
+	}
+
+	#red	{
+		background-color: rgb(254,156,142);
+		border-radius: 0 100px 0 0;
+	    -moz-border-radius: 0 100px 0 0;
+	    -webkit-border-radius: 0 100px 0 0;
+	}
+
+	#red:active	{
+		background-color: rgb(255,86,67);
+	}
+
+	#green	{
+		background-color: rgb(220,235,102);
+		border-radius: 0 0 100px 0;
+	    -moz-border-radius: 0 0 100px 0;
+	    -webkit-border-radius: 0 0 100px 0;
+	}
+
+	#green:active	{
+		background-color: rgb(190,222,21);
+	}
+
+	button	{
+		border:1px solid grey;
+	}
+	button:focus {
+    background-color: none;
+    outline: 0;
+    -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="gameArea center-block">
+			<div class="row center-block">
+				<button id="blue" class="gameBtn"></button>
+				<button id="red" class="gameBtn"></button>
+			</div>
+			<div class="row center-block">
+				<button id="yellow" class="gameBtn"></button>
+				<button id="green" class="gameBtn"></button>
+			</div>
+			<div class="row center-block">
+				<button id="start" class="startBtn center-block">Click to start!</button>
+			</div>
+		</div>
+	</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script>
+"use strict";
+(function() {
+    $(document).ready(function() {
+
+    	// user pushes start - DONE
+    	// color is randomly selected, inserted into end of solution array - DONE
+    	// solution array is shown
+    	// user clicks correct color
+    	// color is randomly selected, inserted into end of solution array
+    	// solution array is shown
+
+    	//available colors
+	    var colors = ['red', 'yellow', 'green', 'blue'];
+
+	    //selects a random color
+	    var color = colors[Math.floor(Math.random()*colors.length)];
+		
+		//holds correct color sequence
+	    var solution = []
+
+	    //refers to index of solution array
+	    var index = 0
+
+	    function showSolution(value) {
+	    	switch (value) {
+				case "red":
+	                $('#red').animate ({
+	                    'backgroundColor' : 'rgb(255,86,67)'
+	                }, 750);
+					$('#red').animate ({
+	                    'backgroundColor' : 'rgb(254,156,142)'
+	                }, 500);
+					break;
+				case "yellow":
+					$('#yellow').animate ({
+	                    'backgroundColor' : 'rgb(254,239,51)'
+	                }, 750);
+					$('#yellow').animate ({
+	                    'backgroundColor' : 'rgb(255,245,123)'
+	                }, 500);
+					break;
+				case "green":
+					$('#green').animate ({
+	                    'backgroundColor' : 'rgb(190,222,21)'
+	                }, 750);
+					$('#green').animate ({
+	                    'backgroundColor' : 'rgb(220,235,102)'
+	                }, 500);
+					break;
+				case "blue":
+					$('#blue').animate ({
+	                    'backgroundColor' : 'rgb(30,144,255)'
+	                }, 750);
+					$('#blue').animate ({
+	                    'backgroundColor' : 'rgb(116,189,255)'
+	                }, 500);
+					break;
+			};
+	    };
+
+	    // the game
+	    $('.startBtn').click(function(event) {
+   			switch (color) {
+				case "red":
+	                $('#red').animate ({
+	                    'backgroundColor' : 'rgb(255,86,67)'
+	                }, 750);
+					$('#red').animate ({
+	                    'backgroundColor' : 'rgb(254,156,142)'
+	                }, 500);
+	                solution.push(color);
+	                console.log(solution);
+					break;
+				case "yellow":
+					$('#yellow').animate ({
+	                    'backgroundColor' : 'rgb(254,239,51)'
+	                }, 750);
+					$('#yellow').animate ({
+	                    'backgroundColor' : 'rgb(255,245,123)'
+	                }, 500);
+	                solution.push(color);
+	                console.log(solution);
+					break;
+				case "green":
+					$('#green').animate ({
+	                    'backgroundColor' : 'rgb(190,222,21)'
+	                }, 750);
+					$('#green').animate ({
+	                    'backgroundColor' : 'rgb(220,235,102)'
+	                }, 500);
+	                solution.push(color);
+	                console.log(solution);
+					break;
+				case "blue":
+					$('#blue').animate ({
+	                    'backgroundColor' : 'rgb(30,144,255)'
+	                }, 750);
+					$('#blue').animate ({
+	                    'backgroundColor' : 'rgb(116,189,255)'
+	                }, 500);
+	                solution.push(color);
+	                console.log(solution);
+					break;
+			} //end color animation switch statement
+		    //gets id of clicked on button
+		    $('.gameBtn').click(function(event) {
+
+	   			var userInput = $(this).attr('id');
+	   			console.log(userInput);
+	   			if ( userInput == solution[index] ) {
+	   				console.log("That's right!");
+	   				index++;
+	        		if (index == solution.length) {
+	        			var newColor = colors[Math.floor(Math.random()*colors.length)];
+		    			console.log(newColor);
+	        			solution.push(newColor);
+	        			console.log(solution);
+	        				for (var i = 0; i < solution.length; i++) {
+	        					setTimeout(showSolution, 1500, solution[i]) 
+	        				};
+	        			index = 0;
+	        		};
+	   			} else {
+		        	console.log("WRONG!");
+	        		// displayString = "";
+		   			// var wrongString = "WRONG!"
+					// $('.codeEntry').val( wrongString );
+		        	index = 0;
+		        	solution = []
+        		};
+	   		});
+		});
+
+	    
+	    
+
+	    
+     })
+})();
+
+</script>
+</body>
+</html>
