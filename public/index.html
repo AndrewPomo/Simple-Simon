@@ -32,6 +32,20 @@
 		display:none;
 	}
 
+	#birdieHello, #birdieQuiet {
+		position:absolute;
+		left:-320px;
+		top:80px;
+	}
+
+	#bambiHooray, #bambiMusic {
+		position: absolute;
+		right: -350px;
+		top:-20px;
+		bottom:0px;
+		margin-top:60px;
+	}
+
 	#bambi {
 		position: absolute;
 		right: -170px;
@@ -130,6 +144,18 @@
 	<audio id="bigSwitch">
 			<source src="/Sounds/bigSwitch.wav" type="audio/wav">
 	</audio>
+	<audio id="simonRed">
+			<source src="/Sounds/simonRed.wav" type="audio/wav">
+	</audio>
+	<audio id="simonBlue">
+			<source src="/Sounds/simonBlue.wav" type="audio/wav">
+	</audio>
+	<audio id="simonGreen">
+			<source src="/Sounds/simonGreen.wav" type="audio/wav">
+	</audio>
+	<audio id="simonYellow">
+			<source src="/Sounds/simonYellow.wav" type="audio/wav">
+	</audio>
 	<audio id="powerUp">
 			<source src="/Sounds/powerUp.mp3" type="audio/mp3">
 	</audio>
@@ -143,6 +169,11 @@
 		<div class="gameArea center-block">
 			<h1 class="title center-block text-center">Simple Simon!</h1>
 			<img id="birdie" src="/img/simonBird.png">
+			<img class="birdieConvo" id="birdieHello" src="/img/birdieHello.png">
+			<img class="birdieConvo" id="birdieQuiet" src="/img/birdieQuiet.png">
+			<img class="bambiConvo" id="bambiHooray" src="/img/bambiHooray.png">
+			<img class="bambiConvo" id="bambiMusic" src="/img/bambiMusic.png">
+			<img class="bambiConvo" id="bambiSorry" src="/img/bambiSorry.png">
 			<img id="madBirdie" src="/img/simonAngryBird.png">
 			<img id="bambi" src="/img/simonBambi.gif">
 			<img id="madBambi" src="/img/simonAngryBambi.gif">
@@ -189,39 +220,91 @@
 	    //refers to index of solution array
 	    var index = 0
 
+	    // refers to convo state
+	    var state = 'happy'
+
+
+
+	    // Conversations
+	    $('.birdieConvo').hide();
+	    $('.bambiConvo').hide();
+	    if (state == 'happy') {
+	    	// happy convo
+	    	$('#birdieHello').delay(2000).fadeIn(0);
+	    	$('#birdieHello').delay(3000).fadeOut(0);
+	    	$('#bambiHooray').delay(6500).fadeIn(0);
+	    	$('#bambiHooray').delay(3000).fadeOut(0);
+	    	$('#bambiMusic').delay(15000).fadeIn(0);
+	    	$('#bambiMusic').delay(3000).fadeOut(0);
+	    	$('#birdieQuiet').delay(18000).fadeIn(0);
+	    	$('#birdieQuiet').delay(3000).fadeOut(0);
+	    } else {
+	    	// evil convo
+	    }
+	 	
+	    	
+	    function playSound(userInput) {
+	    	switch (userInput) {
+				case "red":
+	                $('#simonRed').get(0).play();
+					break;
+				case "yellow":
+	                $('#simonYellow').get(0).play();
+					break;
+				case "green":
+	                $('#simonGreen').get(0).play();
+					break;
+				case "blue":
+	                $('#simonBlue').get(0).play();
+					break;
+			};
+		};
+
 	    function showSolution(value) {
 	    	switch (value) {
 				case "red":
 	                $('#red').animate ({
 	                    'opacity' : '1'
-	                }, 750);
-					$('#red').animate ({
-	                    'opacity' : '.6'
-	                }, 500);
+	                }, 10);
+	                setTimeout(function(){
+						$('#red').animate ({
+		                    'opacity' : '.6'
+		                }, 10);
+	                },501)
+	                $('#simonRed').get(0).play();
 					break;
 				case "yellow":
 					$('#yellow').animate ({
 	                    'opacity' : '1'
-	                }, 750);
-					$('#yellow').animate ({
-	                    'opacity' : '.6'
-	                }, 500);
+	                }, 10);
+	                setTimeout(function(){
+						$('#yellow').animate ({
+		                    'opacity' : '.6'
+		                }, 10);
+	                },501)
+	                $('#simonYellow').get(0).play();
 					break;
 				case "green":
 					$('#green').animate ({
 	                    'opacity' : '1'
-	                }, 750);
-					$('#green').animate ({
-	                    'opacity' : '.6'
-	                }, 500);
+	                }, 10);
+	                setTimeout(function(){
+						$('#green').animate ({
+		                    'opacity' : '.6'
+		                }, 10);
+	                },501)
+	                $('#simonGreen').get(0).play();
 					break;
 				case "blue":
 					$('#blue').animate ({
 	                    'opacity' : '1'
-	                }, 750);
-					$('#blue').animate ({
-	                    'opacity' : '.6'
-	                }, 500);
+	                }, 10);
+	                setTimeout(function(){
+						$('#blue').animate ({
+		                    'opacity' : '.6'
+		                }, 10);
+	                },501)
+	                $('#simonBlue').get(0).play();
 					break;
 			};
 			index = 0;
@@ -232,45 +315,96 @@
 				case "red":
 	                $('#red').animate ({
 	                    'opacity' : '1'
-	                }, 750);
-					$('#red').animate ({
-	                    'opacity' : '.6'
-	                }, 500);
+	                }, 10);
+	                setTimeout(function(){
+						$('#red').animate ({
+		                    'opacity' : '.6'
+		                }, 10);
+	                },501)
+	                $('#simonRed').get(0).play();
 	                solution.push(color);
 	                console.log(solution);
 					break;
 				case "yellow":
 					$('#yellow').animate ({
 	                    'opacity' : '1'
-	                }, 750);
-					$('#yellow').animate ({
-	                    'opacity' : '.6'
-	                }, 500);
+	                }, 10);
+	                setTimeout(function(){
+						$('#yellow').animate ({
+		                    'opacity' : '.6'
+		                }, 10);
+	                },501)
+	                $('#simonYellow').get(0).play();
 	                solution.push(color);
 	                console.log(solution);
 					break;
 				case "green":
 					$('#green').animate ({
 	                    'opacity' : '1'
-	                }, 750);
-					$('#green').animate ({
-	                    'opacity' : '.6'
-	                }, 500);
+	                }, 10);
+	                setTimeout(function(){
+						$('#green').animate ({
+		                    'opacity' : '.6'
+		                }, 10);
+	                },501)
+	                $('#simonGreen').get(0).play();
 	                solution.push(color);
 	                console.log(solution);
 					break;
 				case "blue":
 					$('#blue').animate ({
 	                    'opacity' : '1'
-	                }, 750);
-					$('#blue').animate ({
-	                    'opacity' : '.6'
-	                }, 500);
+	                }, 10);
+	                setTimeout(function(){
+						$('#blue').animate ({
+		                    'opacity' : '.6'
+		                }, 10);
+	                },501)
+	                $('#simonBlue').get(0).play();
 	                solution.push(color);
 	                console.log(solution);
 					break;
 			}
 		};
+
+		// game button functionality
+		$('.gameBtn').mousedown(function(event) {
+		    	$(this).css ({
+	                    'opacity' : 1
+	                });
+	   			var userInput = $(this).attr('id');
+	   			playSound(userInput);
+	   			console.log(userInput);
+	   			if ( userInput == solution[index] ) {
+	   				console.log("That's right!");
+	   				console.log(index);
+	   				index++;
+	        		if (index == solution.length) {
+	        			$('.roundNum').val('Round ' + (index + 1));
+	        			var newColor = colors[Math.floor(Math.random()*colors.length)];
+		    			console.log(newColor);
+	        			solution.push(newColor);
+	        			console.log(solution);
+	        			var showIndex = 0
+	        			var interval = setInterval(function(){
+	        				showSolution(solution[showIndex]);
+	        					showIndex++;
+	        					if (showIndex >= solution.length){
+	        						clearInterval(interval);
+	        					}
+    					}, 750);
+	        		};
+	   			} else {
+		        	$('.roundNum').val('WRONG!');
+	        		// displayString = "";
+		   			// var wrongString = "WRONG!"
+					// $('.codeEntry').val( wrongString );
+		        	index = 0;
+		        	solution = [];
+		        	$('#start').show();
+		        	console.log(solution);
+        		};
+	   		});
 
 		function powerFlash(color, upTime, downTime){
 			setTimeout(function(){
@@ -289,7 +423,7 @@
 
 	    $('.startBtn').click(function(event) {
 	    	// Game Intro
-	    	//Dark
+	    	var state = 'sad';
 	    	$('#morningMood').get(0).pause();
 	    	$('#start').hide();
 	    	$('#bambi').hide();
@@ -371,7 +505,7 @@
 	    		$('.gameBtn').animate({
 	    			opacity :'.6'
 	    		}, 1000);
-	    		// $('#hum').get(0).play();
+	    		$('#hum').get(0).play();
 	    	},9000);
 
 	    	setTimeout(function(){
@@ -379,53 +513,14 @@
 	    			opacity : 1
 	    		}, 1000);
 	    	}, 10000);
-	    	setTimeout(function(){
-	    		$('.roundNum').animate({
-	    			opacity : 0
-	    		}, 1000);
-	    	}, 12000);
-   			// setTimeout(showFirstColor, 3000);
+   			setTimeout(showFirstColor, 12000);
 		    //gets id of clicked on button
 		    $('.gameBtn').mouseup(function(event) {
 				$(this).css ({
                     'opacity' : '.6'
-                }, 500);
+                });
+                // figure out how to play sounds
 			});
-		    $('.gameBtn').mousedown(function(event) {
-		    	$(this).css ({
-	                    'opacity' : 1
-	                }, 750);
-	   			var userInput = $(this).attr('id');
-	   			console.log(userInput);
-	   			if ( userInput == solution[index] ) {
-	   				console.log("That's right!");
-	   				index++;
-	        		if (index == solution.length) {
-	        			$('.roundNum').val('Round ' + (index + 1));
-	        			var newColor = colors[Math.floor(Math.random()*colors.length)];
-		    			console.log(newColor);
-	        			solution.push(newColor);
-	        			console.log(solution);
-	        			var showIndex = 0
-	        			var interval = setInterval(function(){
-	        				showSolution(solution[showIndex]);
-	        					showIndex++;
-	        					if (showIndex >= solution.length){
-	        						clearInterval(interval);
-	        					}
-    					}, 1500);        				
-	        		};
-	   			} else {
-		        	console.log("WRONG!");
-	        		// displayString = "";
-		   			// var wrongString = "WRONG!"
-					// $('.codeEntry').val( wrongString );
-		        	index = 0;
-		        	solution = [];
-		        	$('#start').show();
-		        	console.log(solution);
-        		};
-	   		});
 		});
      })
 })();
