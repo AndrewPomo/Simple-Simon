@@ -4,16 +4,58 @@
 	<title>Simple Simon!</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Orbitron:900' rel='stylesheet' type='text/css'>
 	<style type="text/css">
 	body {
 		font-family: Open Sans;
 	}
+
+	.title {
+		font-family:VT323;
+	}
+
+	#birdie {
+		position: absolute;
+		left: -180px;
+		top:80px;
+		bottom:0px;
+		margin-top:60px
+	}
+
+	#madBirdie {
+		position: absolute;
+		left: -180px;
+		top:80px;
+		bottom:0px;
+		margin-top:60px;
+		display:none;
+	}
+
+	#bambi {
+		position: absolute;
+		right: -170px;
+		top:50px;
+		bottom:0px;
+		margin-top:60px;
+	}
+
+	#madBambi {
+		position: absolute;
+		right: -170px;
+		top:50px;
+		bottom:0px;
+		margin-top:60px;
+		display:none;
+	}
+
 	.gameArea {
 		width:200px;
-		margin-top:30px;
+		position: absolute;
 		background-color: white;
 		border-radius: 100px;
-		
+		top:30px;
+		left:43%;
 	}
 	.gameBtn {
 		height:100px;
@@ -24,6 +66,9 @@
 
 	.startBtn {
 		margin-top:5px;
+		font-family:VT323;
+		font-size: 16px;
+		background-color: white;
 	}
 
 	#blue	{
@@ -59,11 +104,15 @@
 	}
 
 	.roundNum {
+		background-color: black;
 		border:none;
 		margin-top:15px;
 		font-size: 20px;
 		font-weight: bold;
-
+		color:darkred;
+		opacity:0;
+		width:200px;
+		font-family: Orbitron;
 	}
 
 	
@@ -82,10 +131,21 @@
 			<source src="/Sounds/bigSwitch.wav" type="audio/wav">
 	</audio>
 	<audio id="powerUp">
-			<source src="/Sounds/powerUp.mp3" type="audio/wav">
+			<source src="/Sounds/powerUp.mp3" type="audio/mp3">
+	</audio>
+	<audio id="morningMood" autoplay>
+			<source src="/Sounds/morningMood.wav" type="audio/mp3">
+	</audio>
+	<audio id="hum"  loop>
+			<source src="/Sounds/simonHum.wav" type="audio/wav">
 	</audio>
 	<div class="container">
 		<div class="gameArea center-block">
+			<h1 class="title center-block text-center">Simple Simon!</h1>
+			<img id="birdie" src="/img/simonBird.png">
+			<img id="madBirdie" src="/img/simonAngryBird.png">
+			<img id="bambi" src="/img/simonBambi.gif">
+			<img id="madBambi" src="/img/simonAngryBambi.gif">
 			<div class="row center-block">
 				<button id="blue" class="gameBtn"></button>
 				<button id="red" class="gameBtn"></button>
@@ -94,11 +154,11 @@
 				<button id="yellow" class="gameBtn"></button>
 				<button id="green" class="gameBtn"></button>
 			</div>
+			<div class="menu">
+				<input class="roundNum center-block text-center">
+		    	<button id="start" class="startBtn center-block">Click to start!</button>
+	    	</div>
 		</div>
-		<div class="container menu">
-			<input class="roundNum center-block text-center">
-	    	<button id="start" class="startBtn center-block">Click to start!</button>
-	    </div>
 	</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
@@ -107,6 +167,7 @@
 <script>
 "use strict";
 (function() {
+			
     $(document).ready(function() {
 
     	// user pushes start - DONE
@@ -211,19 +272,41 @@
 			}
 		};
 
+		function powerFlash(color, upTime, downTime){
+			setTimeout(function(){
+	    		$(color).animate({
+	    		opacity : 1
+	    		}, 175)
+	    	}, upTime)
+	    	setTimeout(function(){
+	    		$(color).animate({
+	    		opacity : 0
+	    		}, 175)
+	    	}, downTime);
+    	};
+
 	    // the game
 
 	    $('.startBtn').click(function(event) {
 	    	// Game Intro
 	    	//Dark
+	    	$('#morningMood').get(0).pause();
 	    	$('#start').hide();
+	    	$('#bambi').hide();
+	    	$('#birdie').hide();
+	    	$('#madBambi').show();
+	    	$('#madBirdie').show();
 	    	$('#start').html('Try again!');
-	    	$('.roundNum').hide();
 	    	$('.roundNum').val('Round ' + (index + 1));
 	    	$('#bigSwitch').get(0).play();
 	    	$('body').css ({
 	    		'background-color' : 'black'
-	    	})
+	    	});
+	    	$('h1').css ({
+	    		'color' : 'darkred',
+	    		'font-family' : 'Orbitron'
+	    	});
+	    	$('h1').html('SIMON');
 	    	$('.gameArea').css ({
 	    		'background-color' : 'black'
 	    	})
@@ -239,82 +322,68 @@
 	    		// 	opacity :'.6'
 	    		// }, 500);
 	    		$('#powerUp').get(0).play();
-	    	},1000)
-	    	setTimeout(function(){
-	    		$('#red').animate({
-	    		opacity : 1
-	    		}, 200)
-	    	}, 2400)
-	    	setTimeout(function(){
-	    		$('#red').animate({
-	    		opacity : 0
-	    		}, 200)
-	    	}, 2500);
-	    	setTimeout(function(){
-	    		$('#green').animate({
-	    		opacity : 1
-	    		}, 200)
-	    	}, 2500)
-	    	setTimeout(function(){
-	    		$('#green').animate({
-	    		opacity : 0
-	    		}, 200)
-	    	}, 2600);
-	    	setTimeout(function(){
-	    		$('#yellow').animate({
-	    		opacity : 1
-	    		}, 200)
-	    	}, 2600)
-	    	setTimeout(function(){
-	    		$('#yellow').animate({
-	    		opacity : 0
-	    		}, 200)
-	    	}, 2700);
-	    	setTimeout(function(){
-	    		$('#blue').animate({
-	    		opacity : 1
-	    		}, 200)
-	    	}, 2700)
-	    	setTimeout(function(){
-	    		$('#blue').animate({
-	    		opacity : 0
-	    		}, 200)
-	    	}, 2800);
-	    	setTimeout(function(){
-	    		$('#red').animate({
-	    		opacity : 1
-	    		}, 200)
-	    	}, 2800)
-	    	setTimeout(function(){
-	    		$('#red').animate({
-	    		opacity : 0
-	    		}, 200)
-	    	}, 2800);
-	    	setTimeout(function(){
-	    		$('#green').animate({
-	    		opacity : 1
-	    		}, 200)
-	    	}, 2900)
-	    	setTimeout(function(){
-	    		$('#green').animate({
-	    		opacity : 0
-	    		}, 200)
-	    	}, 3000);
+	    	},1000);
+	    	// Power wave 1
+	    	powerFlash('#red', 2400, 2510);
+	    	powerFlash('#green', 2510, 2620);
+	    	powerFlash('#yellow', 2620, 2730);
+	    	powerFlash('#blue', 2730, 2840);
+	    	powerFlash('#red', 2840, 2950);
+	    	powerFlash('#green', 2950, 3060);
+	    	powerFlash('#yellow', 3060, 3170);
+	    	powerFlash('#blue', 3170, 3280);
+	    	// Power wave 2
+	    	powerFlash('#blue', 3400, 3510);
+	    	powerFlash('#yellow', 3510, 3620);
+	    	powerFlash('#green', 3620, 3730);
+	    	powerFlash('#red', 3730, 3840);
+	    	powerFlash('#blue', 3840, 3950);
+	    	powerFlash('#yellow', 3950, 4060);
+	    	powerFlash('#green', 4060, 4170);
+	    	powerFlash('#red', 4170, 4280);
+	    	// Power wave 3 (early, too short)
+	    	powerFlash('#blue', 5700, 5810);
+	    	powerFlash('#yellow', 5810, 5920);
+	    	powerFlash('#green', 5920, 6030);
+	    	powerFlash('#red', 6030, 6140);
+	    	powerFlash('#blue', 6140, 6250);
+	    	powerFlash('#yellow', 6250, 6360);
+	    	powerFlash('#green', 6360, 6470);
+	    	powerFlash('#red', 6470, 6580);
+	    	powerFlash('#blue', 6580, 6690);
+	    	powerFlash('#yellow', 6690, 6800);
+	    	powerFlash('#green', 6800, 6910);
+	    	powerFlash('#red', 6910, 7020);
+	    	powerFlash('#blue', 7020, 7130);
+	    	powerFlash('#yellow', 7130, 7240);
+	    	powerFlash('#green', 7240, 7350);
+	    	powerFlash('#red', 7350, 7460);
+	    	powerFlash('#blue', 7460, 7570);
+	    	powerFlash('#yellow', 7570, 7680);
+	    	powerFlash('#green', 7680, 7790);
+	    	powerFlash('#red', 7900, 8010);
 
-	    	// setTimeout(function(){
-	    	// 	$('.gameArea').animate({
-	    	// 		backgroundColor : 'white',
-	    	// 		'border' : '1px solid black'
-	    	// 	}, 500)
-	    	// },100;
-	    	// setTimeout(function(){
-	    	// 	$('.gameBtn').animate({
-	    	// 		opacity : 1
-	    	// 	}, 500);
-	    	// 	$('.gameBtn').animate({
-	    	// 		opacity :'.6'
-	    	// 	}, 500);
-	    	// $('.roundNum').show();
+	    	// Show Game Board
+	    	setTimeout(function(){
+	    		$('.gameBtn').animate({
+	    			opacity : 1
+	    		}, 1800);
+	    		$('.gameBtn').animate({
+	    			opacity :'.6'
+	    		}, 1000);
+	    		// $('#hum').get(0).play();
+	    	},9000);
+
+	    	setTimeout(function(){
+	    		$('.roundNum').animate({
+	    			opacity : 1
+	    		}, 1000);
+	    	}, 10000);
+	    	setTimeout(function(){
+	    		$('.roundNum').animate({
+	    			opacity : 0
+	    		}, 1000);
+	    	}, 12000);
    			// setTimeout(showFirstColor, 3000);
 		    //gets id of clicked on button
 		    $('.gameBtn').mouseup(function(event) {
