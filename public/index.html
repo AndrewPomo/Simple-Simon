@@ -32,15 +32,23 @@
 		display:none;
 	}
 
-	#birdieHello, #birdieQuiet {
+	.birdieConvo {
 		position:absolute;
 		left:-320px;
 		top:80px;
 	}
 
-	#bambiHooray, #bambiMusic {
+	.bambiConvo {
 		position: absolute;
 		right: -350px;
+		top:-20px;
+		bottom:0px;
+		margin-top:60px;
+	}
+
+	#bambiSorry, #bambiWait {
+		position: absolute;
+		right: -280px;
 		top:-20px;
 		bottom:0px;
 		margin-top:60px;
@@ -141,6 +149,7 @@
 	</style>
 </head>
 <body>
+	<!-- simplesimon.dev -->
 	<audio id="bigSwitch">
 			<source src="/Sounds/bigSwitch.wav" type="audio/wav">
 	</audio>
@@ -168,12 +177,18 @@
 	<div class="container">
 		<div class="gameArea center-block">
 			<h1 class="title center-block text-center">Simple Simon!</h1>
+			<div class="happyConvoHolder">
+				<img class="birdieConvo convo" id="birdieHello" src="/img/birdieHello.png">
+				<img class="birdieConvo convo" id="birdieQuiet" src="/img/birdieQuiet.png">
+				<img class="bambiConvo convo" id="bambiHooray" src="/img/bambiHooray.png">
+				<img class="bambiConvo convo" id="bambiMusic" src="/img/bambiMusic.png">
+				<img class="bambiConvo convo" id="bambiSorry" src="/img/bambiSorry.png">
+				<img class="bambiConvo convo" id="bambiWait" src="/img/bambiWait.png">
+			</div>
+			<div class="evilConvoHolder">
+				
+			</div>
 			<img id="birdie" src="/img/simonBird.png">
-			<img class="birdieConvo" id="birdieHello" src="/img/birdieHello.png">
-			<img class="birdieConvo" id="birdieQuiet" src="/img/birdieQuiet.png">
-			<img class="bambiConvo" id="bambiHooray" src="/img/bambiHooray.png">
-			<img class="bambiConvo" id="bambiMusic" src="/img/bambiMusic.png">
-			<img class="bambiConvo" id="bambiSorry" src="/img/bambiSorry.png">
 			<img id="madBirdie" src="/img/simonAngryBird.png">
 			<img id="bambi" src="/img/simonBambi.gif">
 			<img id="madBambi" src="/img/simonAngryBambi.gif">
@@ -238,6 +253,10 @@
 	    	$('#bambiMusic').delay(3000).fadeOut(0);
 	    	$('#birdieQuiet').delay(18000).fadeIn(0);
 	    	$('#birdieQuiet').delay(3000).fadeOut(0);
+	    	$('#bambiSorry').delay(21000).fadeIn(0);
+	    	$('#bambiSorry').delay(2000).fadeOut(0);
+	    	$('#bambiWait').delay(25000).fadeIn(0);
+	    	$('#bambiWait').delay(2000).fadeOut(0);
 	    } else {
 	    	// evil convo
 	    }
