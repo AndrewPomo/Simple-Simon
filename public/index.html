@@ -48,7 +48,7 @@
 
 	#bambiSorry, #bambiWait {
 		position: absolute;
-		right: -280px;
+		right: -230px;
 		top:-20px;
 		bottom:0px;
 		margin-top:60px;
@@ -178,12 +178,26 @@
 		<div class="gameArea center-block">
 			<h1 class="title center-block text-center">Simple Simon!</h1>
 			<div class="happyConvoHolder">
-				<img class="birdieConvo convo" id="birdieHello" src="/img/birdieHello.png">
-				<img class="birdieConvo convo" id="birdieQuiet" src="/img/birdieQuiet.png">
-				<img class="bambiConvo convo" id="bambiHooray" src="/img/bambiHooray.png">
-				<img class="bambiConvo convo" id="bambiMusic" src="/img/bambiMusic.png">
-				<img class="bambiConvo convo" id="bambiSorry" src="/img/bambiSorry.png">
-				<img class="bambiConvo convo" id="bambiWait" src="/img/bambiWait.png">
+				<img class="birdieConvo happyConvo" id="birdieHello" src="/img/birdieHello.png">
+				<img class="birdieConvo happyConvo" id="birdieQuiet" src="/img/birdieQuiet.png">
+				<img class="bambiConvo happyConvo" id="bambiHooray" src="/img/bambiHooray.png">
+				<img class="bambiConvo happyConvo" id="bambiMusic" src="/img/bambiMusic.png">
+				<img class="bambiConvo happyConvo" id="bambiSorry" src="/img/bambiSorry.png">
+				<img class="bambiConvo happyConvo" id="bambiWait" src="/img/bambiWait.png">
+				<img class="birdieConvo happyConvo" id="birdieWait" src="/img/birdieWait.png">
+				<img class="bambiConvo happyConvo" id="bambiArm" src="/img/bambiArm.png">
+				<img class="birdieConvo happyConvo" id="birdieHurry" src="/img/birdieHurry.png">
+				<img class="bambiConvo happyConvo" id="bambiMad" src="/img/bambiMad.png">
+				<img class="birdieConvo happyConvo" id="birdieStammer" src="/img/birdieStammer.png">
+				<img class="bambiConvo happyConvo" id="bambiArgue" src="/img/bambiArgue.png">
+				<img class="birdieConvo happyConvo" id="birdieCold" src="/img/birdieCold.png">
+				<img class="bambiConvo happyConvo" id="bambiGary" src="/img/bambiGary.png">
+				<img class="birdieConvo evilConvo" id="birdieGotcha" src="/img/birdieGotcha.png">
+				<img class="bambiConvo evilConvo" id="bambiCopy" src="/img/bambiCopy.png">
+				<img class="birdieConvo evilConvo" id="birdieComplex" src="/img/birdieComplex.png">
+				<img class="bambiConvo evilConvo" id="bambiComplex" src="/img/bambiComplex.png">
+				<img class="birdieConvo evilConvo" id="birdieCant" src="/img/birdieCant.png">
+				<img class="birdieConvo evilConvo" id="birdieSuck" src="/img/birdieSuck.png">
 			</div>
 			<div class="evilConvoHolder">
 				
@@ -216,13 +230,6 @@
 			
     $(document).ready(function() {
 
-    	// user pushes start - DONE
-    	// color is randomly selected, inserted into end of solution array - DONE
-    	// solution array is shown
-    	// user clicks correct color
-    	// color is randomly selected, inserted into end of solution array
-    	// solution array is shown
-
     	//available colors
 	    var colors = ['red', 'yellow', 'green', 'blue'];
 
@@ -243,23 +250,43 @@
 	    // Conversations
 	    $('.birdieConvo').hide();
 	    $('.bambiConvo').hide();
-	    if (state == 'happy') {
 	    	// happy convo
 	    	$('#birdieHello').delay(2000).fadeIn(0);
 	    	$('#birdieHello').delay(3000).fadeOut(0);
-	    	$('#bambiHooray').delay(6500).fadeIn(0);
+	    	$('#bambiHooray').delay(4000).fadeIn(0);
 	    	$('#bambiHooray').delay(3000).fadeOut(0);
-	    	$('#bambiMusic').delay(15000).fadeIn(0);
+	    	$('#bambiWait').delay(13000).fadeIn(0);
+	    	$('#bambiWait').delay(3000).fadeOut(0);
+	    	$('#bambiMusic').delay(16500).fadeIn(0);
 	    	$('#bambiMusic').delay(3000).fadeOut(0);
-	    	$('#birdieQuiet').delay(18000).fadeIn(0);
+	    	$('#birdieQuiet').delay(19500).fadeIn(0);
 	    	$('#birdieQuiet').delay(3000).fadeOut(0);
-	    	$('#bambiSorry').delay(21000).fadeIn(0);
+	    	$('#bambiSorry').delay(22500).fadeIn(0);
 	    	$('#bambiSorry').delay(2000).fadeOut(0);
-	    	$('#bambiWait').delay(25000).fadeIn(0);
+	    	$('#bambiWait').delay(16000).fadeIn(0);
 	    	$('#bambiWait').delay(2000).fadeOut(0);
-	    } else {
-	    	// evil convo
-	    }
+	    	$('#birdieWait').delay(33000).fadeIn(0);
+	    	$('#birdieWait').delay(2000).fadeOut(0);
+	    	$('#bambiWait').delay(2000).fadeIn(0);
+	    	$('#bambiWait').delay(2000).fadeOut(0);
+	    	$('#birdieWait').delay(2000).fadeIn(0);
+	    	$('#birdieWait').delay(2000).fadeOut(0);
+	    	$('#bambiArm').delay(39000).fadeIn(0);
+	    	$('#bambiArm').delay(2000).fadeOut(0);
+	    	$('#birdieHurry').delay(41000).fadeIn(0);
+	    	$('#birdieHurry').delay(2000).fadeOut(0);
+	    	$('#bambiMad').delay(43000).fadeIn(0);
+	    	$('#bambiMad').delay(7000).fadeOut(0);
+	    	$('#birdieStammer').delay(50000).fadeIn(0);
+	    	$('#birdieStammer').delay(2000).fadeOut(0);
+	    	$('#bambiArgue').delay(52000).fadeIn(0);
+	    	$('#bambiArgue').delay(5000).fadeOut(0);
+	    	$('#birdieWait').delay(19000).fadeIn(0);
+	    	$('#birdieWait').delay(2000).fadeOut(0);
+	    	$('#birdieCold').delay(60000).fadeIn(0);
+	    	$('#birdieCold').delay(5000).fadeOut(0);
+	    	$('#bambiGary').delay(65000).fadeIn(0);
+	    	$('#bambiGary').delay(5000).fadeOut(0);
 	 	
 	    	
 	    function playSound(userInput) {
@@ -415,6 +442,8 @@
 	        		};
 	   			} else {
 		        	$('.roundNum').val('WRONG!');
+		        	$('#birdieSuck').delay(0).fadeIn(0);
+	    			$('#birdieSuck').delay(2000).fadeOut(0);
 	        		// displayString = "";
 		   			// var wrongString = "WRONG!"
 					// $('.codeEntry').val( wrongString );
@@ -441,8 +470,25 @@
 	    // the game
 
 	    $('.startBtn').click(function(event) {
+	    	$('.happyConvo').css({
+	    		'height': '0px',
+	    		'width': '0px'
+	    	});
+	    	// Evil Convo
+	    	$('#birdieGotcha').fadeIn(0);
+	    	$('#birdieGotcha').delay(2000).fadeOut(0);
+	    	$('#bambiCopy').delay(2000).fadeIn(0);
+	    	$('#bambiCopy').delay(2000).fadeOut(0);
+	    	$('#birdieComplex').delay(4000).fadeIn(0);
+	    	$('#birdieComplex').delay(3000).fadeOut(0);
+	    	$('#bambiComplex').delay(7000).fadeIn(0);
+	    	$('#bambiComplex').delay(3000).fadeOut(0);
+	    	$('#birdieWait').delay(10000).fadeIn(0);
+	    	$('#birdieWait').delay(2000).fadeOut(0);
+	    	$('#birdieCant').delay(12000).fadeIn(0);
+	    	$('#birdieCant').delay(2000).fadeOut(0);
+
 	    	// Game Intro
-	    	var state = 'sad';
 	    	$('#morningMood').get(0).pause();
 	    	$('#start').hide();
 	    	$('#bambi').hide();
@@ -468,13 +514,7 @@
 	    	}, 1)
 	    	// Power Up
 	    	setTimeout(function(){
-	    		// $('.gameBtn').animate({
-	    		// 	opacity : 1
-	    		// }, 500);
-	    		// $('.gameBtn').animate({
-	    		// 	opacity :'.6'
-	    		// }, 500);
-	    		$('#powerUp').get(0).play();
+	    	$('#powerUp').get(0).play();
 	    	},1000);
 	    	// Power wave 1
 	    	powerFlash('#red', 2400, 2510);
@@ -533,7 +573,7 @@
 	    		}, 1000);
 	    	}, 10000);
    			setTimeout(showFirstColor, 12000);
-		    //gets id of clicked on button
+
 		    $('.gameBtn').mouseup(function(event) {
 				$(this).css ({
                     'opacity' : '.6'
